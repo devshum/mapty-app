@@ -9,10 +9,10 @@ class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
 
-  constructor(cords, distance, duration) {
+  constructor(coords, distance, duration) {
     // this.date = ...
     // this.id = ...
-    this.cords = cords;
+    this.coords = coords;
     this.distance = distance; // in km
     this.duration = duration; // in min
   }
@@ -132,7 +132,7 @@ class App {
       ) 
         return alert('Inputs have to be positive numbers')
 
-      workout = new Running([lat, lng], distance, duration, cadence);
+      workout = new Cycling([lat, lng], distance, duration, cadence);
     }
 
     // If activity cycling, create cycling object
@@ -152,8 +152,6 @@ class App {
     this.#workouts.push(workout);
 
     // Render workout on map as marker
-    console.log(workout);
-
     this._renderWorkoutMarker(workout);
 
     // Render workout on list
@@ -173,7 +171,7 @@ class App {
       minWidth: 100,
       autoClose: false,
       closeOnClick: false,
-      className: 'workout'
+      className: `${workout.type}-popup`
     }))
     .setPopupContent('Workout')
     .openPopup();
